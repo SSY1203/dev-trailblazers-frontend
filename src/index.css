@@ -25,3 +25,10 @@ body,
     'Segoe UI Symbol',
     sans-serif;
 }
+
+html,
+body,
+#root,
+.App {
+  height: 100%;
+}
