@@ -1,4 +1,4 @@
-import { CommentCard, Layout } from '../../components';
+import { CommentCard, Editor, Layout } from '../../components';
 
 const Post = () => {
   return (
@@ -56,8 +56,19 @@ const Post = () => {
           <CommentCard />
           <CommentCard type="reply" />
           <CommentCard />
+          <CommentCard type="reply" userId="a" />
           <CommentCard />
-          <div className="basicBorder p-[20px] py-[10px]"></div>
+          <div className="basicBorder p-[20px] py-[10px] h-[420px] relative">
+            <div>
+              <Editor height={'300px'} />
+            </div>
+            <div className="absolute right-[20px] bottom-[12px] flex justify-end gap-4 ">
+              <button className="basicButton bg-zinc-600 text-white">
+                수정
+              </button>
+              <button className="basicButton">삭제</button>
+            </div>
+          </div>
         </div>
       </div>
     </Layout>

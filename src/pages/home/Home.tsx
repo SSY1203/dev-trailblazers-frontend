@@ -1,9 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import { Layout, PostCard } from '../../components';
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <Layout>
-      <div className="flex justify-end py-4 pr-6 borderBottom">
+      <div className="flex justify-end gap-4 py-4 pr-6 borderBottom">
         <select
           className="w-32 text-center py-1 border rounded-lg border-gray-200 text-sm font-semibold text-neutral-600"
           name="post-filter"
@@ -13,6 +15,12 @@ const Home = () => {
           <option value="viewCount">조회순</option>
           <option value="comments">댓글순</option>
         </select>
+        <button
+          className="basicButton bg-zinc-600 text-white"
+          onClick={() => navigate('/post/create')}
+        >
+          글쓰기
+        </button>
       </div>
       <PostCard />
       <PostCard />
