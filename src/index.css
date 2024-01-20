@@ -1,1 +1,86 @@
 @import 'reset-css';
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+html,
+body,
+#root,
+.App {
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
+  color: #555555;
+}
+
+html,
+body,
+#root,
+.App {
+  height: auto;
+}
+
+@layer components {
+  /* Sub header */
+  .subHeader {
+    @apply text-center text-gray-400 text-sm;
+  }
+
+  /* 해쉬태그 */
+  .badge {
+    @apply border border-gray-200 border-solid rounded-lg py-1 px-2.5 bg-zinc-50 text-zinc-400 font-semibold;
+  }
+
+  /* 페이지네이션 공통 */
+  .pagination {
+    @apply px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
+  }
+
+  /* 페이지네이션 화살표 */
+  .paginationIcon {
+    @apply ms-0 border-e-0;
+  }
+
+  /* 좋아요 및 댓글 개수 표시 */
+  .likeAndChat {
+    @apply flex items-center gap-2 text-stone-300 text-sm;
+  }
+
+  /* Border Bottom */
+  .borderBottom {
+    @apply border-b border-gray-200 border-solid;
+  }
+
+  /* Basic Button */
+  .basicButton {
+    @apply border border-gray-200 border-solid rounded-lg py-2.5 px-7 text-sm text-zinc-600;
+  }
+}
+
+@layer utilities {
+  /* 가로세로 중앙 */
+  .center {
+    @apply flex items-center justify-center;
+  }
+
+  /* basic border style */
+  .basicBorder {
+    @apply border border-gray-200 border-solid rounded-lg;
+  }
+}
