@@ -26,6 +26,7 @@ body,
     'Segoe UI Emoji',
     'Segoe UI Symbol',
     sans-serif;
+  color: #555555;
 }
 
 html,
@@ -76,5 +77,10 @@ body,
   /* 가로세로 중앙 */
   .center {
     @apply flex items-center justify-center;
+  }
+
+  /* basic border style */
+  .basicBorder {
+    @apply border border-gray-200 border-solid rounded-lg;
   }
 }

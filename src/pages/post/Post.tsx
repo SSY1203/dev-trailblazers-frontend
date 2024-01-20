@@ -1,4 +1,4 @@
-import { Layout } from '../../components';
+import { CommentCard, Layout } from '../../components';
 
 const Post = () => {
   return (
@@ -18,7 +18,7 @@ const Post = () => {
           </div>
         </div>
         <div className="p-7 borderBottom">
-          <div className="mb-[60px]">
+          <div className="mb-[60px] min-h-[500px]">
             <p className="text-base text-slate-700">
               버튼 클릭 시, history로 페이지 이동하는 기능을 구현했습니다!
               이렇게 하는 게 맞나요?
@@ -50,6 +50,14 @@ const Post = () => {
               <button className="basicButton">삭제</button>
             </div>
           </div>
+        </div>
+        {/* 댓글 시작 */}
+        <div className="px-[12px] py-[20px] flex flex-col gap-[16px]">
+          <CommentCard />
+          <CommentCard type="reply" />
+          <CommentCard />
+          <CommentCard />
+          <div className="basicBorder p-[20px] py-[10px]"></div>
         </div>
       </div>
     </Layout>
