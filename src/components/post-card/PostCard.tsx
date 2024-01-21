@@ -1,8 +1,12 @@
-const PostCard = () => {
+interface PostCardPropType {
+  style?: string;
+}
+
+const PostCard = ({ style = 'borderBottom' }: PostCardPropType) => {
   return (
     <a
       href="/post/id"
-      className=" w-full px-6 pt-6 pb-4  flex flex-col gap-9 borderBottom"
+      className={`w-full px-6 pt-6 pb-4  flex flex-col gap-9 ${style}`}
     >
       <div className="w-full flex flex-col items-start gap-3">
         <div className="flex justify-between w-full">

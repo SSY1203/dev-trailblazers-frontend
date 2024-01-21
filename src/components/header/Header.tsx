@@ -8,7 +8,7 @@ const Header = () => {
               로그인
             </a>
             <a
-              href="javascript:void(0)"
+              href="/mypage/edit/user/id"
               className="subHeader border-x border-gray-200 border-solid px-2 px "
             >
               마이페이지
