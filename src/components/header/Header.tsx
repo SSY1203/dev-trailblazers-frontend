@@ -4,7 +4,7 @@ const Header = () => {
       <div className="bg-gray-100 h-12">
         <div className="mx-auto flex justify-end items-center h-full max-w-[1000px] min-w-[900px]">
           <div className="grid grid-cols-3 gap-0">
-            <a href="javascript:void(0)" className="subHeader">
+            <a href="/login" className="subHeader">
               로그인
             </a>
             <a
