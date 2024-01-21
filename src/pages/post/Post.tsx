@@ -64,9 +64,8 @@ const Post = () => {
             </div>
             <div className="absolute right-[20px] bottom-[12px] flex justify-end gap-4 ">
               <button className="basicButton bg-zinc-600 text-white">
-                수정
+                등록
               </button>
-              <button className="basicButton">삭제</button>
             </div>
           </div>
         </div>
