@@ -4,7 +4,7 @@ import GithubLogin from '../../../assets/github-login.svg';
 const Login = () => {
   return (
     <Layout>
-      <div className="flex justify-center items-center py-40">
+      <div className="center py-40">
         <form className="w-[368px] m-[30px] pt-[30px] mt-0 flex flex-col gap-40">
           <span className="text-center text-[36px] font-semibold">로그인</span>
           <a href="/signup">

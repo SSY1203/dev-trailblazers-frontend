@@ -5,7 +5,7 @@ const Home = () => {
   const navigate = useNavigate();
   return (
     <Layout>
-      <div className="flex justify-end gap-4 py-4 pr-6 borderBottom">
+      <div className="iconPosition py-4 pr-6 borderBottom">
         <select
           className="w-32 text-center py-1 border rounded-lg border-gray-200 text-sm font-semibold text-neutral-600"
           name="post-filter"
@@ -27,7 +27,7 @@ const Home = () => {
       <PostCard />
       <PostCard />
       <nav className="flex justify-center mt-6">
-        <ul className="flex items-center -space-x-px h-8 text-sm">
+        <ul className="iconAndText gap-0 -space-x-px h-8 text-sm">
           <li>
             <a
               href="#"

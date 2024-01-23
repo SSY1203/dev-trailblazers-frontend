@@ -10,9 +10,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="h-full">
       <Header />
       <main className="bg-zinc-50 h-full">
-        <div className="max-w-[1000px] min-w-[900px] h-full bg-white mx-auto border-x border-gray-200 border-solid">
-          {children}
-        </div>
+        <div className="contentsWidth bg-white  inlineBorder">{children}</div>
       </main>
     </div>
   );

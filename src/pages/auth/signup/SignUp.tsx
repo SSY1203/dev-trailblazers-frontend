@@ -3,7 +3,7 @@ import { Layout } from '../../../components';
 const SignUp = () => {
   return (
     <Layout>
-      <div className="flex justify-center items-center py-32">
+      <div className="center py-32">
         <form className="w-[368px] m-[30px] pt-[30px] mt-0 flex flex-col">
           <span className="text-center text-[36px] font-semibold">
             회원가입
@@ -18,7 +18,7 @@ const SignUp = () => {
               className="basicBorder px-[15px] py-[15px]"
             />
           </div>
-          <div className="flex flex-col justify-center gap-2 mt-[10px]">
+          <div className="labelInput">
             <label htmlFor="age" className="text-[18px] font-semibold">
               나이
             </label>
@@ -36,7 +36,7 @@ const SignUp = () => {
               id="gender"
               className="flex justify-between basicBorder px-[60px] py-[15px]"
             >
-              <div className="flex items-center gap-2">
+              <div className="iconAndText">
                 <input
                   id="man"
                   name="gender"
@@ -46,7 +46,7 @@ const SignUp = () => {
                 />
                 <label htmlFor="men">남성</label>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="iconAndText">
                 <input
                   id="woman"
                   name="gender"
@@ -58,7 +58,7 @@ const SignUp = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col justify-center gap-2 mt-[10px]">
+          <div className="labelInput">
             <label htmlFor="area" className="text-[18px] font-semibold">
               지역
             </label>
@@ -68,7 +68,7 @@ const SignUp = () => {
               className="basicBorder px-[15px] py-[15px]"
             />
           </div>
-          <div className="flex flex-col justify-center gap-2 mt-[10px]">
+          <div className="labelInput">
             <label
               htmlFor="experienceLevel"
               className="text-[18px] font-semibold"
@@ -81,7 +81,7 @@ const SignUp = () => {
               className="basicBorder px-[15px] py-[15px]"
             />
           </div>
-          <div className="flex flex-col justify-center gap-2 mt-[10px]">
+          <div className="labelInput">
             <label htmlFor="jobRole" className="text-[18px] font-semibold">
               개발 직군
             </label>

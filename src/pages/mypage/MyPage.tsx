@@ -8,7 +8,7 @@ const MyPage = ({ children }: any) => {
   return (
     <Layout>
       <div className="p-[30px]">
-        <div className="flex items-center gap-4 pb-2 px-2 borderBottom">
+        <div className="iconAndText gap-4 pb-2 px-2 borderBottom">
           <a
             className={`text-[18px] font-medium ${pathname === '/mypage/edit/user/id' && 'text-red-400'}`}
             href="/mypage/edit/user/id"

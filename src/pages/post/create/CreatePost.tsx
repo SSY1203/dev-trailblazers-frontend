@@ -13,7 +13,7 @@ const CreatePost = () => {
             type="text"
             placeholder="제목을 입력해 주세요"
           />
-          <div className="border-b border-solid border-[#DDDDDD] my-[23px]" />
+          <div className="borderBottom my-[23px]" />
           <div className="mx-[20px] h-[650px] relative flex flex-col mb-[30px]">
             <Editor height={'500px'} />
             <input
@@ -22,7 +22,7 @@ const CreatePost = () => {
               placeholder="해시 태그를 입력해 주세요"
             />
           </div>
-          <div className="flex justify-end gap-4 mx-[20px] mb-[247px]">
+          <div className="iconPosition mx-[20px] mb-[247px]">
             <button className="basicButton bg-zinc-600 text-white">게시</button>
             <button className="basicButton">취소</button>
           </div>

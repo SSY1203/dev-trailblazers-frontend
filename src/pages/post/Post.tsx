@@ -13,7 +13,7 @@ const Post = () => {
               2024/01/03
             </span>
           </div>
-          <div className="flex justify-end">
+          <div className="iconPosition gap-0">
             <span className="text-sm text-slate-700">OOO님</span>
           </div>
         </div>
@@ -22,11 +22,9 @@ const Post = () => {
             <p className="text-base text-slate-700">
               버튼 클릭 시, history로 페이지 이동하는 기능을 구현했습니다!
               이렇게 하는 게 맞나요?
-            </p>
-            <p className="text-base text-slate-700">
+              <br />
               아니면 더 좋게 짜는 방법이 있을까요? 조언 부탁드립니다~
-            </p>
-            <p className="text-base text-slate-700">
+              <br />
               React는 18버전 이용 중이고, 우선은 위 코드는 전체 코드의
               일부입니다! 다른 코드 부분이 필요하시다면 바로 올리겠습니다! 잘
               부탁드립니다! ㅎㅎㅎ
@@ -62,7 +60,7 @@ const Post = () => {
             <div>
               <Editor height={'300px'} />
             </div>
-            <div className="absolute right-[20px] bottom-[12px] flex justify-end gap-4 ">
+            <div className="absolute right-[20px] bottom-[12px] iconPosition ">
               <button className="basicButton bg-zinc-600 text-white">
                 등록
               </button>

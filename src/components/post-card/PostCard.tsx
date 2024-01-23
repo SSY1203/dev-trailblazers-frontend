@@ -28,7 +28,7 @@ const PostCard = ({ style = 'borderBottom' }: PostCardPropType) => {
           <div className="badge">신입</div>
           <div className="badge">클린코드</div>
         </div>
-        <div className="flex justify-end gap-2">
+        <div className="iconPosition gap-2">
           <div className="likeAndChat">
             <span className="material-symbols-outlined">visibility</span>
             <span>16</span>

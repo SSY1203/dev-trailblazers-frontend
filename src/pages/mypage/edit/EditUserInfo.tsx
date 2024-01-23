@@ -14,7 +14,7 @@ const EditUserInfo = () => {
             className="basicBorder px-[15px] py-[15px]"
           />
         </div>
-        <div className="flex flex-col justify-center gap-2 mt-[10px]">
+        <div className="labelInput">
           <label htmlFor="area" className="text-[18px] font-semibold">
             지역
           </label>
@@ -24,7 +24,7 @@ const EditUserInfo = () => {
             className="basicBorder px-[15px] py-[15px]"
           />
         </div>
-        <div className="flex flex-col justify-center gap-2 mt-[10px]">
+        <div className="labelInput">
           <label
             htmlFor="experienceLevel"
             className="text-[18px] font-semibold"
@@ -37,7 +37,7 @@ const EditUserInfo = () => {
             className="basicBorder px-[15px] py-[15px]"
           />
         </div>
-        <div className="flex flex-col justify-center gap-2 mt-[10px]">
+        <div className="labelInput">
           <label htmlFor="jobRole" className="text-[18px] font-semibold">
             개발 직군
           </label>
