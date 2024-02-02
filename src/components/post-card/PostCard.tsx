@@ -1,8 +1,17 @@
 interface PostCardPropType {
+  post: {
+    id: number;
+    title: string;
+    content: string;
+    hashtags: string;
+    modifiedBy: number;
+    createdAt: string;
+    modifiedAt: string;
+  };
   style?: string;
 }
 
-const PostCard = ({ style = 'borderBottom' }: PostCardPropType) => {
+const PostCard = ({ post, style = 'borderBottom' }: PostCardPropType) => {
   return (
     <a
       href="/post/id"
@@ -10,18 +19,16 @@ const PostCard = ({ style = 'borderBottom' }: PostCardPropType) => {
     >
       <div className="w-full flex flex-col items-start gap-3">
         <div className="flex justify-between w-full">
-          <span className="text-sm text-zinc-600">OOO님</span>
-          <span className="text-zinc-400 font-semibold">
-            2024/01/03 21:31:41
+          <span className="text-sm text-zinc-600">{post.modifiedBy}님</span>
+          <span className="text-zinc-400 font-medium text-sm">
+            {new Date(post.createdAt).toLocaleString()}
           </span>
         </div>
-        <span className="text-zinc-600 text-lg font-medium">
-          코린이 코드 리뷰 부탁드립니다ㅠㅠㅠ
-        </span>
+        <span className="text-zinc-600 text-lg font-medium">{post.title}</span>
       </div>
       <div className="flex justify-between w-full">
         <div className="flex gap-2">
-          <div className="badge">frontend</div>
+          <div className="badge">{post.hashtags}</div>
           <div className="badge">React</div>
           <div className="badge">비동기</div>
           <div className="badge">async await</div>

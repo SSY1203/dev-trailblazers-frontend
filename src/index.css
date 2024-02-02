@@ -83,6 +83,11 @@ input[type='number']::-webkit-inner-spin-button {
   .iconSize {
     @apply text-[20px];
   }
+
+  /* label + input */
+  .labelInput {
+    @apply flex flex-col justify-center gap-2 mt-[10px];
+  }
 }
 
 /* 스타일 종류 */
