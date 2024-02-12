@@ -134,21 +134,6 @@ const Home = () => {
             </button>
           ))}
 
-          {/* {Array(totalPages)
-            .fill('')
-            .map((_, index) => (
-              <button
-                key={index + 1}
-                value={index}
-                onClick={(e) => onMovePage(e, index)}
-              >
-                <li>
-                  <a href="#" className="center pagination">
-                    {index + 1}
-                  </a>
-                </li>
-              </button>
-            ))} */}
           <button
             disabled={activePage === totalPages}
             onClick={() => onMovePage(activePage + 1)}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Editor, Layout } from '../../../components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { PostType } from '../../../types/PostType';
 
 const initialPost = {
@@ -9,30 +9,53 @@ const initialPost = {
   hashtags: '',
 };
 
-const CreatePost = () => {
+const EditPost = () => {
+  const { postId } = useParams();
   const navigate = useNavigate();
 
   const [postInfo, setPostInfo] = useState<PostType>(initialPost);
   const [hashTags, setHashTags] = useState<string[]>([]);
 
   useEffect(() => {
+    const onFetch = async () => {
+      await onGetPost();
+    };
+
+    onFetch();
+  }, []);
+
+  useEffect(() => {
     console.log(postInfo);
   }, [postInfo]);
 
-  const onCreatePost = async () => {
+  const onGetPost = async () => {
     try {
-      const result = await fetch(`http://localhost:8080/articles`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postInfo),
-      });
+      const result = await fetch(`http://localhost:8080/articles/id/${postId}`);
+      const data = await result.json();
+
+      setPostInfo(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onEditPost = async () => {
+    try {
+      const result = await fetch(
+        `http://localhost:8080/articles/id/${postId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(postInfo),
+        }
+      );
       const data = await result.json();
       console.log(result.json());
       navigate(`/post/${data.id}`);
 
-      // alert('생성되었습니다.');
+      alert('수정되었습니다.');
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +65,7 @@ const CreatePost = () => {
     <Layout>
       <div className="px-[30px] w-full">
         <span className="text-[36px] font-medium flex justify-center py-[30px]">
-          게시글 작성
+          게시글 수정
         </span>
         <div className="flex flex-col">
           <input
@@ -79,9 +102,9 @@ const CreatePost = () => {
           <div className="iconPosition mx-[20px] mb-[247px]">
             <button
               className="basicButton bg-zinc-600 text-white"
-              onClick={onCreatePost}
+              onClick={onEditPost}
             >
-              게시
+              수정
             </button>
             <button className="basicButton" onClick={() => navigate('/post')}>
               취소
@@ -93,4 +116,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default EditPost;

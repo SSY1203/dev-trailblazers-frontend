@@ -3,9 +3,11 @@ import ReactQuill, { Quill } from 'react-quill';
 
 interface EditorPropType {
   height: string;
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
-const Editor = ({ height }: EditorPropType) => {
+const Editor = ({ height, value, onChange }: EditorPropType) => {
   Quill.register('modules/ImageResize', ImageResize);
   const modules = {
     toolbar: [
@@ -49,6 +51,8 @@ const Editor = ({ height }: EditorPropType) => {
       style={{ height }}
       modules={modules}
       formats={formats}
+      value={value}
+      onChange={onChange}
     />
   );
 };
