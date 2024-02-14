@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Layout, PostCard } from '../../components';
 import { useEffect, useState } from 'react';
+import { PAGES_PER_SECTION, SIZE, SORT_FIELD } from '../../data';
 
 interface PostType {
   id: number;
@@ -17,9 +18,6 @@ const Home = () => {
 
   const [posts, setPosts] = useState<PostType[]>([]);
   const [activePage, setActivePage] = useState(1);
-  const SIZE = 10;
-  const PAGES_PER_SECTION = 5;
-  const SORT_FIELD = 'createdAt';
 
   const [totalPages, setTotalPages] = useState(1);
 
@@ -53,7 +51,7 @@ const Home = () => {
   const onGetPosts = async () => {
     try {
       const result = await fetch(
-        `http://localhost:8080/articles/keyword/a?page=${activePage}&size=${SIZE}&sort=${SORT_FIELD}`
+        `/articles/keyword/a?page=${activePage}&size=${SIZE}&sort=${SORT_FIELD}`
       );
       const json = await result.json();
 
@@ -71,7 +69,7 @@ const Home = () => {
   };
 
   return (
-    <Layout>
+    <Layout setPosts={setPosts}>
       <div className="iconPosition py-4 pr-6 borderBottom">
         <select
           className="w-32 text-center py-1 border rounded-lg border-gray-200 text-sm font-semibold text-neutral-600"

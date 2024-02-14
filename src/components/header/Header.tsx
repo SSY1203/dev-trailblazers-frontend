@@ -1,4 +1,27 @@
-const Header = () => {
+import { useState } from 'react';
+import { SIZE, SORT_FIELD } from '../../data';
+
+interface HeaderType {
+  setPosts?: any;
+}
+
+const Header = ({ setPosts }: HeaderType) => {
+  const [search, setSearch] = useState('');
+
+  // 검색
+  const onSearch = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    try {
+      event.preventDefault();
+      const result = await fetch(
+        `/articles/keyword/${search}?page=0&size=${SIZE}&sort=${SORT_FIELD}`
+      );
+      const json = await result.json();
+      setPosts(json);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <header className="borderBottom">
       <div className="bg-gray-100 h-12">
@@ -23,12 +46,20 @@ const Header = () => {
         <h2 className="w-2/6 text-4xl font-black text-neutral-600 pl-4">
           <a href="/">Community</a>
         </h2>
-        <div className="w-4/6 flex relative items-center pr-4">
-          <input className="basicButton w-full py-4 px-5 text-sm" type="text" />
-          <button className="absolute end-9">
+        <form className="w-4/6 flex relative items-center pr-4">
+          <input
+            className="basicButton w-full py-4 px-5 text-sm"
+            type="text"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+          <button
+            onClick={(event) => onSearch(event)}
+            className="absolute end-9"
+          >
             <span className="material-symbols-outlined">search</span>
           </button>
-        </div>
+        </form>
       </div>
     </header>
   );

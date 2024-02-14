@@ -30,10 +30,26 @@ const EditPost = () => {
 
   const onGetPost = async () => {
     try {
-      const result = await fetch(`http://localhost:8080/articles/id/${postId}`);
-      const data = await result.json();
+      const result = await fetch(`/articles/id/${postId}`);
+      const {
+        id,
+        title,
+        content,
+        hashtags,
+        createdAt,
+        modifiedAt,
+        modifiedBy,
+      } = await result.json();
 
-      setPostInfo(data);
+      setPostInfo({
+        id,
+        title,
+        content,
+        hashtags,
+        createdAt,
+        modifiedAt,
+        modifiedBy,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -41,21 +57,19 @@ const EditPost = () => {
 
   const onEditPost = async () => {
     try {
-      const result = await fetch(
-        `http://localhost:8080/articles/id/${postId}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(postInfo),
-        }
-      );
-      const data = await result.json();
-      console.log(result.json());
-      navigate(`/post/${data.id}`);
+      const result = await fetch(`/articles/id/${postId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postInfo),
+      });
+      // const data = await result.json();
+      // console.log(result.json());
+      // navigate(`/post/${data.id}`);
 
       alert('수정되었습니다.');
+      navigate(-1);
     } catch (error) {
       console.log(error);
     }

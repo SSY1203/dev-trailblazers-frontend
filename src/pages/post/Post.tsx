@@ -23,9 +23,31 @@ const Post = () => {
 
   const onGetPost = async () => {
     try {
-      const result = await fetch(`http://localhost:8080/articles/id/${postId}`);
+      const result = await fetch(`/articles/id/${postId}`);
       const data = await result.json();
       setPostInfo(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 삭제
+  const onDeletePost = async () => {
+    try {
+      if (
+        !confirm(
+          '해당 게시글을 삭제하시겠습니까? \n 한 번 삭제한 게시글은 복구하실 수 없습니다.'
+        )
+      ) {
+        return;
+      }
+
+      await fetch(`/articles/id/${postId}`, {
+        method: 'DELETE',
+      });
+
+      alert('삭제되었습니다.');
+      navigate('/post');
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +92,9 @@ const Post = () => {
               >
                 수정
               </button>
-              <button className="basicButton">삭제</button>
+              <button onClick={onDeletePost} className="basicButton">
+                삭제
+              </button>
             </div>
           </div>
         </div>

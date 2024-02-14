@@ -21,18 +21,19 @@ const CreatePost = () => {
 
   const onCreatePost = async () => {
     try {
-      const result = await fetch(`http://localhost:8080/articles`, {
+      const result = await fetch(`/articles`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(postInfo),
       });
-      const data = await result.json();
-      console.log(result.json());
-      navigate(`/post/${data.id}`);
+      // const data = await result.json();
+      console.log(result);
+      // navigate(`/post/${data.id}`);
 
-      // alert('생성되었습니다.');
+      alert('게시되었습니다.');
+      navigate('/post');
     } catch (error) {
       console.log(error);
     }
