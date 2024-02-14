@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { Layout, PostCard } from '../../components';
+import { Layout, Pagination, PostCard } from '../../components';
 import { useEffect, useState } from 'react';
-import { PAGES_PER_SECTION, SIZE, SORT_FIELD } from '../../data';
+import { SIZE, SORT_FIELD } from '../../data';
 
 interface PostType {
   id: number;
@@ -17,16 +17,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const [posts, setPosts] = useState<PostType[]>([]);
-  const [activePage, setActivePage] = useState(1);
-
-  const [totalPages, setTotalPages] = useState(1);
-
-  // const totalSections = Math.ceil(totalPages / PAGES_PER_SECTION);
-
-  const sectionNumber = Math.ceil(activePage / PAGES_PER_SECTION);
-
-  const startPage = (sectionNumber - 1) * PAGES_PER_SECTION + 1;
-  const endPage = Math.min(startPage + PAGES_PER_SECTION - 1, totalPages);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const onFetchData = async () => {
@@ -42,7 +33,7 @@ const Home = () => {
     };
 
     onFetchData();
-  }, [activePage]);
+  }, [currentPage]);
 
   useEffect(() => {
     console.log(posts);
@@ -51,21 +42,15 @@ const Home = () => {
   const onGetPosts = async () => {
     try {
       const result = await fetch(
-        `/articles/keyword/a?page=${activePage}&size=${SIZE}&sort=${SORT_FIELD}`
+        `http://localhost:8080/articles/keyword/a?page=${currentPage - 1}&size=${SIZE}&sort=${SORT_FIELD}`
       );
+
       const json = await result.json();
 
       setPosts(json);
-      console.log(Math.ceil(json.length / PAGES_PER_SECTION));
-
-      setTotalPages(Math.ceil(json.length / PAGES_PER_SECTION));
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const onMovePage = (page: number) => {
-    setActivePage(page);
   };
 
   return (
@@ -90,75 +75,8 @@ const Home = () => {
       {posts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
-      <nav className="flex justify-center mt-6">
-        <ul className="iconAndText gap-0 -space-x-px h-8 text-sm">
-          <button
-            disabled={activePage === 1}
-            onClick={() => onMovePage(activePage - 1)}
-          >
-            <li>
-              <span className="center pagination paginationIcon rounded-s-lg">
-                <span className="sr-only">Previous</span>
-                <svg
-                  className="w-2.5 h-2.5 rtl:rotate-180"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 6 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 1 1 5l4 4"
-                  />
-                </svg>
-              </span>
-            </li>
-          </button>
-
-          {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
-            <button
-              key={startPage + index}
-              onClick={() => onMovePage(startPage + index)}
-              disabled={activePage === startPage + index}
-            >
-              <li>
-                <span className="center pagination cursor-pointer">
-                  {startPage + index}
-                </span>
-              </li>
-            </button>
-          ))}
-
-          <button
-            disabled={activePage === totalPages}
-            onClick={() => onMovePage(activePage + 1)}
-          >
-            <li>
-              <span className="center pagination paginationIcon rounded-e-lg">
-                <span className="sr-only">Next</span>
-                <svg
-                  className="w-2.5 h-2.5 rtl:rotate-180"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 6 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m1 9 4-4-4-4"
-                  />
-                </svg>
-              </span>
-            </li>
-          </button>
-        </ul>
-      </nav>
+      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <div className="mb-2"></div>
     </Layout>
   );
 };
