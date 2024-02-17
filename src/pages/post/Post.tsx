@@ -25,12 +25,15 @@ const Post = () => {
     try {
       const result = await fetch(`/articles/id/${postId}`);
       const data = await result.json();
+      console.log(data);
+
       setPostInfo(data);
     } catch (error) {
       console.log(error);
     }
   };
 
+  // Dto : Data Transfer Object
   // 삭제
   const onDeletePost = async () => {
     try {
@@ -99,22 +102,28 @@ const Post = () => {
           </div>
         </div>
         {/* 댓글 시작 */}
-        <div className="px-[12px] py-[20px] flex flex-col gap-[16px]">
-          <CommentCard />
-          <CommentCard type="reply" />
-          <CommentCard />
-          <CommentCard type="reply" userId="a" />
-          <CommentCard />
-          <div className="basicBorder p-[20px] py-[10px] h-[420px] relative">
-            <div>
-              <Editor height={'300px'} />
-            </div>
-            <div className="absolute right-[20px] bottom-[12px] iconPosition ">
-              <button className="basicButton bg-zinc-600 text-white">
-                등록
-              </button>
-            </div>
+        <div className="basicBorder p-[20px] pb-[10px] h-[440px] relative mt-[20px] ">
+          <span className="block pl-[10px] pt-[5px] font-medium">
+            댓글 달기
+          </span>
+          <div className="absolute right-[20px] top-[12px] iconPosition ">
+            <button className="basicButton bg-zinc-600 text-white">등록</button>
           </div>
+          <div className="mt-[30px]">
+            <Editor height={'300px'} />
+          </div>
+        </div>
+        <div className="borderBottom py-[10px]"></div>
+        <div className="px-[12px] py-[20px] flex flex-col gap-[16px]">
+          {postInfo.commentDtos && postInfo.commentDtos.length > 0 ? (
+            postInfo.commentDtos.map((comment) => (
+              <CommentCard key={comment.id} comment={comment} />
+            ))
+          ) : (
+            <span className="flex justify-center items-center h-[250px]">
+              등록된 댓글이 없습니다.
+            </span>
+          )}
         </div>
       </div>
     </Layout>

@@ -8,10 +8,16 @@ interface HeaderType {
 const Header = ({ setPosts }: HeaderType) => {
   const [search, setSearch] = useState('');
 
-  // 검색
+  // 검색(단, 검색어 길이는 30글자 미만)
   const onSearch = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
       event.preventDefault();
+
+      if (search.length > 30) {
+        alert('검색어는 30글자 미만이어야 합니다.');
+        return;
+      }
+
       const result = await fetch(
         `/articles/keyword/${search}?page=0&size=${SIZE}&sort=${SORT_FIELD}`
       );

@@ -17,6 +17,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const [posts, setPosts] = useState<PostType[]>([]);
+  const [totalPostsCount, setTotalPostsCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -44,10 +45,10 @@ const Home = () => {
       const result = await fetch(
         `http://localhost:8080/articles/keyword/a?page=${currentPage - 1}&size=${SIZE}&sort=${SORT_FIELD}`
       );
-
       const json = await result.json();
 
-      setPosts(json);
+      setPosts(json.dtos);
+      setTotalPostsCount(json.totalCount);
     } catch (error) {
       console.log(error);
     }
@@ -72,10 +73,12 @@ const Home = () => {
           글쓰기
         </button>
       </div>
-      {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
-      ))}
-      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      {posts && posts.map((post) => <PostCard key={post.id} post={post} />)}
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPosts={totalPostsCount}
+      />
       <div className="mb-2"></div>
     </Layout>
   );

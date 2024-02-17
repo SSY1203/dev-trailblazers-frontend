@@ -14,7 +14,7 @@ interface PostCardPropType {
 const PostCard = ({ post, style = 'borderBottom' }: PostCardPropType) => {
   return (
     <a
-      href="/post/id"
+      href={`/post/${post.id}`}
       className={`w-full px-6 pt-6 pb-4  flex flex-col gap-9 ${style}`}
     >
       <div className="w-full flex flex-col items-start gap-3">

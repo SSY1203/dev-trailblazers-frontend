@@ -1,23 +1,44 @@
+import { useEffect } from 'react';
+import { CommentType } from '../../types/PostType';
+
 interface CommentPropType {
-  type?: 'comment' | 'reply';
   userId?: string;
+  comment: CommentType;
 }
 
-const CommentCard = ({ type = 'comment', userId }: CommentPropType) => {
+const CommentCard = ({ comment }: CommentPropType) => {
+  const {
+    id,
+    content,
+    userId,
+    articleId,
+    createdAt,
+    modifiedAt,
+    modifiedBy,
+    parentCommentId,
+  } = comment;
+
+  useEffect(() => {
+    const current = new Date().getTime();
+    const past = new Date(createdAt).getTime();
+    const diff = current - past;
+    console.log(diff);
+  }, []);
+
   return (
     <div className="iconAndText gap-0">
-      {type === 'reply' && (
+      {content === 'reply' && (
         <span className="material-symbols-outlined px-[18px]">
           subdirectory_arrow_right
         </span>
       )}
       <div
         className={`${
-          type === 'reply' ? 'bg-white' : 'bg-[#fafafa]'
+          content === 'reply' ? 'bg-white' : 'bg-[#fafafa]'
         } basicBorder p-[20px] py-[10px] pt-[12px] grow`}
       >
         <div className="flex justify-between items-center mb-[16px]">
-          <span className="text-[14px]">OOO님</span>
+          <span className="text-[14px]">{userId}님</span>
           <div className="iconAndText gap-4">
             {userId && (
               <div className="mt-[8px] iconPosition gap-[10px]">
