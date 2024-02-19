@@ -1,14 +1,58 @@
 import { Layout } from '../../../components';
 
 const SignUp = () => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    try {
+      event.preventDefault();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Layout>
       <div className="center py-32">
-        <form className="w-[368px] m-[30px] pt-[30px] mt-0 flex flex-col">
+        <form
+          onSubmit={onSubmit}
+          className="w-[368px] m-[30px] pt-[30px] mt-0 flex flex-col"
+        >
           <span className="text-center text-[36px] font-semibold">
             회원가입
           </span>
           <div className="flex flex-col justify-center gap-2 mt-[40px]">
+            <label htmlFor="email" className="text-[18px] font-semibold">
+              아이디(이메일)
+            </label>
+            <input
+              id="email"
+              type="email"
+              className="basicBorder px-[15px] py-[15px]"
+            />
+          </div>
+          <div className="labelInput">
+            <label htmlFor="password" className="text-[18px] font-semibold">
+              비밀번호
+            </label>
+            <input
+              id="password"
+              type="password"
+              className="basicBorder px-[15px] py-[15px]"
+            />
+          </div>
+          <div className="labelInput">
+            <label
+              htmlFor="passwordCheck"
+              className="text-[18px] font-semibold"
+            >
+              비밀번호 확인
+            </label>
+            <input
+              id="passwordCheck"
+              type="password"
+              className="basicBorder px-[15px] py-[15px]"
+            />
+          </div>
+          <div className="labelInput">
             <label htmlFor="nickname" className="text-[18px] font-semibold">
               닉네임
             </label>

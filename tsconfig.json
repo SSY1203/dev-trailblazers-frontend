@@ -18,5 +18,5 @@
     "outDir": "./public",
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "public"]
+  "exclude": ["node_modules", "public"],
 }

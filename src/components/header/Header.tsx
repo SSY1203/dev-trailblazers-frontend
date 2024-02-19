@@ -22,7 +22,7 @@ const Header = ({ setPosts }: HeaderType) => {
         `/articles/keyword/${search}?page=0&size=${SIZE}&sort=${SORT_FIELD}`
       );
       const json = await result.json();
-      setPosts(json);
+      setPosts(json.dtos);
     } catch (error) {
       console.log(error);
     }
