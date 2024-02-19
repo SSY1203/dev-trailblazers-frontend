@@ -36,9 +36,9 @@ const Home = () => {
     onFetchData();
   }, [currentPage]);
 
-  useEffect(() => {
-    console.log(posts);
-  }, [posts]);
+  // useEffect(() => {
+  //   console.log(posts);
+  // }, [posts]);
 
   const onGetPosts = async () => {
     try {

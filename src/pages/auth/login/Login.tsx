@@ -20,7 +20,7 @@ const Login = () => {
           // loginInfo
           {
             email: 'testuser1@example.com',
-            password: '12345',
+            password: '1234',
           }
         ),
       }).then((res) => {
@@ -29,6 +29,7 @@ const Login = () => {
         if (res.status === 200) {
           alert('로그인 성공했습니다.');
           navigate('/');
+          return;
         }
 
         if (res.status === 403) {
