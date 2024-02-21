@@ -19,6 +19,7 @@ const Post = () => {
   useEffect(() => {
     const onFetch = async () => {
       await onGetPost();
+      console.log(postInfo);
     };
 
     onFetch();
@@ -97,7 +98,7 @@ const Post = () => {
             </span>
           </div>
           <div className="iconPosition gap-0">
-            <span className="text-sm text-slate-700">{postInfo.id}님</span>
+            <span className="text-sm text-slate-700">{postInfo.userId}님</span>
           </div>
         </div>
         <div className="p-7 borderBottom">

@@ -18,4 +18,5 @@ export interface PostType {
   modifiedAt?: string;
   modifiedBy?: number;
   commentDtos?: CommentType[];
+  userId?: number;
 }

@@ -28,12 +28,10 @@ const CreatePost = () => {
         },
         body: JSON.stringify(postInfo),
       });
-      // const data = await result.json();
-      console.log(result);
-      // navigate(`/post/${data.id}`);
+      const data = await result.json();
 
       alert('게시되었습니다.');
-      navigate('/post');
+      navigate(`/post/${data}`);
     } catch (error) {
       console.log(error);
     }

@@ -5,24 +5,21 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
+  const [loginInfo, setLoginInfo] = useState({
+    username: 'testuser1@example.com',
+    password: '1234',
+  });
 
   const onLogin = (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
 
+      const formData = new FormData(event.currentTarget);
+
       fetch(`http://localhost:8080/login`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(
-          // loginInfo
-          {
-            email: 'testuser1@example.com',
-            password: '1234',
-          }
-        ),
+        credentials: 'include',
+        body: formData,
       }).then((res) => {
         console.log(res);
 
@@ -49,22 +46,25 @@ const Login = () => {
       <div className="center py-40 flex-col">
         <span className="text-center text-[36px] font-semibold">로그인</span>
         <form
-          action="submit"
           onSubmit={onLogin}
           className="w-[368px] m-[30px] pt-[30px] mt-0 flex flex-col gap-0 mb-[50px]"
         >
           <div className="labelInput">
             <label htmlFor="loginId" className="text-[18px] font-semibold">
-              아이디
+              아이디(이메일)
             </label>
             <input
               // required
+              name="username"
               id="loginId"
-              type="email"
+              // type="email"
               className="basicBorder px-[15px] py-[15px]"
-              value={loginInfo.email}
+              value={loginInfo.username}
               onChange={(event) =>
-                setLoginInfo((prev) => ({ ...prev, email: event.target.value }))
+                setLoginInfo((prev) => ({
+                  ...prev,
+                  username: event.target.value,
+                }))
               }
             />
           </div>
@@ -78,6 +78,7 @@ const Login = () => {
             <input
               // required
               id="loginPassword"
+              name="password"
               type="password"
               className="basicBorder px-[15px] py-[15px]"
               value={loginInfo.password}
@@ -89,7 +90,10 @@ const Login = () => {
               }
             />
           </div>
-          <button className="basicBorder mt-[40px] px-auto py-[15px] bg-[#555555] text-white text-[16px] font-semibold">
+          <button
+            type="submit"
+            className="basicBorder mt-[40px] px-auto py-[15px] bg-[#555555] text-white text-[16px] font-semibold"
+          >
             로그인
           </button>
         </form>
