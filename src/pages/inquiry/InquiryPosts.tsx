@@ -1,10 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Layout, Pagination, PostCard } from '../../components';
 import { useEffect, useState } from 'react';
-import { SIZE } from '../../data';
 import { PostType } from '../../types/PostType';
+import { SIZE } from '../../data';
 
-const Home = () => {
+const InquiryPosts = () => {
+  const { keyword } = useParams();
   const navigate = useNavigate();
 
   const [sortType, setSortType] = useState('createdAt');
@@ -40,7 +41,7 @@ const Home = () => {
   const onGetPosts = async () => {
     try {
       const result = await fetch(
-        `http://localhost:8080/articles/keyword/a?page=${currentPage - 1}&size=${SIZE}&sort=${sortType},desc`
+        `http://localhost:8080/articles/keyword/${keyword}?page=${currentPage - 1}&size=${SIZE}&sort=${sortType},desc`
       );
       const json = await result.json();
 
@@ -83,4 +84,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default InquiryPosts;

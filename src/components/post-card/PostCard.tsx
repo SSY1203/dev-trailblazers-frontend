@@ -1,17 +1,27 @@
+import { useEffect, useState } from 'react';
+import { PostType } from '../../types/PostType';
+
 interface PostCardPropType {
-  post: {
-    id: number;
-    title: string;
-    content: string;
-    hashtags: string;
-    modifiedBy: number;
-    createdAt: string;
-    modifiedAt: string;
-  };
+  post: PostType;
   style?: string;
 }
 
 const PostCard = ({ post, style = 'borderBottom' }: PostCardPropType) => {
+  const [commentsCount, setCommentsCount] = useState(0);
+
+  useEffect(() => {
+    onCountComments();
+  }, []);
+
+  const onCountComments = async () => {
+    try {
+      const result = await fetch(`/articles/id/${post.id}`);
+      const json = await result.json();
+      setCommentsCount(json.commentDtos.length);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <a
       href={`/post/${post.id}`}
@@ -21,7 +31,7 @@ const PostCard = ({ post, style = 'borderBottom' }: PostCardPropType) => {
         <div className="flex justify-between w-full">
           <span className="text-sm text-zinc-600">{post.modifiedBy}님</span>
           <span className="text-zinc-400 font-medium text-sm">
-            {new Date(post.createdAt).toLocaleString()}
+            {new Date(post.createdAt ?? '').toLocaleString()}
           </span>
         </div>
         <span className="text-zinc-600 text-lg font-medium">{post.title}</span>
@@ -42,7 +52,7 @@ const PostCard = ({ post, style = 'borderBottom' }: PostCardPropType) => {
           </div>
           <div className="likeAndChat">
             <span className="material-symbols-outlined">sms</span>
-            <span>16</span>
+            <span>{commentsCount}</span>
           </div>
         </div>
       </div>

@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { SIZE, SORT_FIELD } from '../../data';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderType {
   setPosts?: any;
 }
 
-const Header = ({ setPosts }: HeaderType) => {
+const Header = () => {
+  const navigate = useNavigate();
+
   const [search, setSearch] = useState('');
 
   // 검색(단, 검색어 길이는 30글자 미만)
@@ -18,11 +21,7 @@ const Header = ({ setPosts }: HeaderType) => {
         return;
       }
 
-      const result = await fetch(
-        `/articles/keyword/${search}?page=0&size=${SIZE}&sort=${SORT_FIELD}`
-      );
-      const json = await result.json();
-      setPosts(json.dtos);
+      navigate(`/inquiry/${search}`);
     } catch (error) {
       console.log(error);
     }

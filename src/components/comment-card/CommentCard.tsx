@@ -3,11 +3,12 @@ import { CommentType } from '../../types/PostType';
 import { onGetTimeDifference } from '../../utils';
 
 interface CommentPropType {
-  userId?: string;
+  isLogin?: boolean;
   comment: CommentType;
+  childCount?: number;
 }
 
-const CommentCard = ({ comment }: CommentPropType) => {
+const CommentCard = ({ isLogin, comment, childCount }: CommentPropType) => {
   const {
     id,
     content,
@@ -42,7 +43,7 @@ const CommentCard = ({ comment }: CommentPropType) => {
         <div className="flex justify-between items-center mb-[16px]">
           <span className="text-[14px]">{userId}님</span>
           <div className="iconAndText gap-4">
-            {userId && (
+            {isLogin && (
               <div className="mt-[8px] iconPosition gap-[10px]">
                 <button>
                   <span className=" material-symbols-outlined iconSize">
@@ -70,10 +71,12 @@ const CommentCard = ({ comment }: CommentPropType) => {
             </span>
             <span className="text-[14px] font-medium">20</span>
           </button>
-          <button className="iconAndText">
-            <span className=" material-symbols-outlined iconSize">chat</span>
-            <span className="text-[14px] font-medium">20</span>
-          </button>
+          {!parentCommentId && (
+            <button className="iconAndText">
+              <span className=" material-symbols-outlined iconSize">chat</span>
+              <span className="text-[14px] font-medium">{childCount}</span>
+            </button>
+          )}
         </div>
       </div>
     </div>

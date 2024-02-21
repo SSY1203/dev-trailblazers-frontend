@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { CommentCard, Editor, Layout } from '../../components';
 import { useEffect, useState } from 'react';
-import { PostType } from '../../types/PostType';
+import { CommentType, PostType } from '../../types/PostType';
 
 const Post = () => {
   const navigate = useNavigate();
@@ -12,6 +12,9 @@ const Post = () => {
     content: '',
     hashtags: '',
   });
+  const [comments, setComments] = useState<
+    { parentComment: CommentType; childComments: CommentType[] | null }[]
+  >([]);
 
   useEffect(() => {
     const onFetch = async () => {
@@ -25,8 +28,33 @@ const Post = () => {
     try {
       const result = await fetch(`/articles/id/${postId}`);
       const data = await result.json();
-      console.log(data);
+      const parentComments: CommentType[] = data.commentDtos
+        .filter((comment: CommentType) => !comment.parentCommentId)
+        .sort(
+          (a: CommentType, b: CommentType) =>
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
+      const childComments: CommentType[] = data.commentDtos
+        .filter((comment: CommentType) => comment.parentCommentId)
+        .sort(
+          (a: CommentType, b: CommentType) =>
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
 
+      const combineComments: {
+        parentComment: CommentType;
+        childComments: CommentType[] | null;
+      }[] = [];
+
+      for (const parent of parentComments) {
+        const filterChild = childComments.filter(
+          (comment: CommentType) => comment.parentCommentId === parent.id
+        );
+        const comment = { parentComment: parent, childComments: filterChild };
+        combineComments.push(comment);
+      }
+
+      setComments(combineComments);
       setPostInfo(data);
     } catch (error) {
       console.log(error);
@@ -80,12 +108,24 @@ const Post = () => {
           <div className="flex justify-between">
             <div>
               <div className="flex gap-2">
-                <div className="badge">{postInfo.hashtags}</div>
-                <div className="badge">React</div>
-                <div className="badge">비동기</div>
-                <div className="badge">async await</div>
-                <div className="badge">신입</div>
-                <div className="badge">클린코드</div>
+                <a href="javascript:void(0)" className="badge">
+                  {postInfo.hashtags}
+                </a>
+                <a href="javascript:void(0)" className="badge">
+                  React
+                </a>
+                <a href="javascript:void(0)" className="badge">
+                  비동기
+                </a>
+                <a href="javascript:void(0)" className="badge">
+                  async await
+                </a>
+                <a href="javascript:void(0)" className="badge">
+                  신입
+                </a>
+                <a href="javascript:void(0)" className="badge">
+                  클린코드
+                </a>
               </div>
             </div>
             <div className="flex gap-4">
@@ -115,9 +155,23 @@ const Post = () => {
         </div>
         <div className="borderBottom py-[10px]"></div>
         <div className="px-[12px] py-[20px] flex flex-col gap-[16px]">
-          {postInfo.commentDtos && postInfo.commentDtos.length > 0 ? (
-            postInfo.commentDtos.map((comment) => (
-              <CommentCard key={comment.id} comment={comment} />
+          {comments && comments.length > 0 ? (
+            comments.map((comment) => (
+              <>
+                <CommentCard
+                  key={comment.parentComment.id}
+                  comment={comment.parentComment}
+                  childCount={comment.childComments?.length}
+                />
+                {comment.childComments
+                  ? comment.childComments.map((childComment) => (
+                      <CommentCard
+                        key={childComment.id}
+                        comment={childComment}
+                      />
+                    ))
+                  : null}
+              </>
             ))
           ) : (
             <span className="flex justify-center items-center h-[250px]">

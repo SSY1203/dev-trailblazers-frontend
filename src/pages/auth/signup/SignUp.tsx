@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Layout } from '../../../components';
 
 const SignUp = () => {
+  const [phone, setPhone] = useState('');
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
@@ -63,6 +65,16 @@ const SignUp = () => {
             />
           </div>
           <div className="labelInput">
+            <label htmlFor="username" className="text-[18px] font-semibold">
+              이름
+            </label>
+            <input
+              id="username"
+              type="text"
+              className="basicBorder px-[15px] py-[15px]"
+            />
+          </div>
+          <div className="labelInput">
             <label htmlFor="age" className="text-[18px] font-semibold">
               나이
             </label>
@@ -101,6 +113,26 @@ const SignUp = () => {
                 <label htmlFor="woman">여성</label>
               </div>
             </div>
+          </div>
+          <div className="labelInput">
+            <label htmlFor="phone" className="text-[18px] font-semibold">
+              전화번호
+            </label>
+            <input
+              id="phone"
+              type="text"
+              maxLength={13}
+              className="basicBorder px-[15px] py-[15px]"
+              value={phone}
+              onChange={(event) =>
+                setPhone(
+                  event.target.value
+                    .replace(/[^0-9]/g, '')
+                    .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
+                    .replace(/(-{1,2})$/g, '')
+                )
+              }
+            />
           </div>
           <div className="labelInput">
             <label htmlFor="area" className="text-[18px] font-semibold">

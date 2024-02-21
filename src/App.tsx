@@ -5,6 +5,7 @@ import {
   EditPost,
   EditUserInfo,
   Home,
+  InquiryPosts,
   Login,
   MyPosts,
   Post,
@@ -16,7 +17,13 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          {/* 홈 */}
           <Route path="/" element={<Home />} />
+
+          {/* 검색 및 조회 */}
+          <Route path="/inquiry/:keyword" element={<InquiryPosts />} />
+
+          {/* 게시글 */}
           <Route path="/post/:postId" element={<Post />} />
           <Route path="/post/create" element={<CreatePost />} />
           <Route path="/post/edit/:postId" element={<EditPost />} />
