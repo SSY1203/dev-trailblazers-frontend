@@ -1,10 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getCookie } from '../../utils';
 
 const Header = () => {
   const navigate = useNavigate();
 
   const [search, setSearch] = useState('');
+  const [nickname, setNickname] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getUser();
+    };
+
+    fetchData();
+  }, []);
+
+  const getUser = async () => {
+    try {
+      const cookie = getCookie('USERINFO');
+
+      if (cookie) {
+        setNickname(cookie);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // 검색(단, 검색어 길이는 30글자 미만)
   const onSearch = async (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -22,6 +44,7 @@ const Header = () => {
     }
   };
 
+  // 로그아웃
   const onLogout = () => {
     try {
       fetch(`${process.env.REACT_APP_API}/logout`);
@@ -37,13 +60,22 @@ const Header = () => {
     <header className="borderBottom">
       <div className="bg-gray-100 h-12">
         <div className=" iconPosition gap-0 items-center  contentsWidth">
-          <div className={`grid grid-cols-4 gap-0`}>
-            <a href="/login" className="subHeader">
-              로그인
-            </a>
-            <button onClick={onLogout} className="subHeader inlineBorder px-2">
-              로그아웃
-            </button>
+          <div className={`grid grid-cols-${nickname ? 4 : 3} gap-0`}>
+            {nickname ? (
+              <span className="subHeader">{nickname}님</span>
+            ) : (
+              <a href="/login" className="subHeader">
+                로그인
+              </a>
+            )}
+            {nickname && (
+              <button
+                onClick={onLogout}
+                className="subHeader inlineBorder px-2"
+              >
+                로그아웃
+              </button>
+            )}
             <a
               href="/mypage/edit/user/id"
               className="subHeader inlineBorder px-2"

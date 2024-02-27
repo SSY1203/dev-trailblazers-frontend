@@ -1,4 +1,4 @@
-const onGetTimeDifference = (time: string): number | string => {
+const getTimeDifference = (time: string): number | string => {
   const milliSeconds = new Date().getTime() - new Date(time).getTime();
   const seconds = milliSeconds / 1000;
   if (seconds < 60) return `방금 전`;
@@ -16,4 +16,4 @@ const onGetTimeDifference = (time: string): number | string => {
   return `${Math.floor(years)}년 전`;
 };
 
-export default onGetTimeDifference;
+export default getTimeDifference;

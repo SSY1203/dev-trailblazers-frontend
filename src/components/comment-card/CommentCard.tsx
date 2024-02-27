@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CommentType } from '../../types/PostType';
-import { onGetTimeDifference } from '../../utils';
+import { getTimeDifference } from '../../utils';
 
 interface CommentPropType {
   isLogin?: boolean;
@@ -23,7 +23,7 @@ const CommentCard = ({ isLogin, comment, childCount }: CommentPropType) => {
   const [ago, setAgo] = useState<number | string>('');
 
   useEffect(() => {
-    const time = onGetTimeDifference(createdAt);
+    const time = getTimeDifference(createdAt);
 
     setAgo(time);
   }, []);

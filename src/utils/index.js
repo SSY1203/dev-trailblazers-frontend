@@ -1,1 +1,2 @@
-export { default as onGetTimeDifference } from './onGetTimeDifference';
+export { default as getTimeDifference } from './getTimeDifference';
+export { default as getCookie } from './getCookie';

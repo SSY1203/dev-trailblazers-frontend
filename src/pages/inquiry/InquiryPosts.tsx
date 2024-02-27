@@ -15,30 +15,30 @@ const InquiryPosts = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const onFetchData = async () => {
-      await onGetPosts();
+    const fetchData = async () => {
+      await getPosts();
     };
 
-    onFetchData();
+    fetchData();
   }, []);
 
   useEffect(() => {
-    const onFetchData = async () => {
-      await onGetPosts();
+    const fetchData = async () => {
+      await getPosts();
     };
 
-    onFetchData();
+    fetchData();
   }, [currentPage]);
 
   useEffect(() => {
-    const onFetchData = async () => {
-      await onGetPosts();
+    const fetchData = async () => {
+      await getPosts();
     };
 
-    onFetchData();
+    fetchData();
   }, [sortType]);
 
-  const onGetPosts = async () => {
+  const getPosts = async () => {
     try {
       const result = await fetch(
         `${process.env.REACT_APP_API}/articles/keyword/${keyword}?page=${currentPage - 1}&size=${SIZE}&sort=${sortType},desc`

@@ -3,6 +3,7 @@ import { Layout } from '../../../components';
 
 const SignUp = () => {
   const [phone, setPhone] = useState('');
+
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();

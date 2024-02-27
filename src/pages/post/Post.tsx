@@ -17,15 +17,15 @@ const Post = () => {
   >([]);
 
   useEffect(() => {
-    const onFetch = async () => {
-      await onGetPost();
+    const fetchData = async () => {
+      await getPost();
       console.log(postInfo);
     };
 
-    onFetch();
+    fetchData();
   }, []);
 
-  const onGetPost = async () => {
+  const getPost = async () => {
     try {
       const result = await fetch(
         `${process.env.REACT_APP_API}/articles/id/${postId}`

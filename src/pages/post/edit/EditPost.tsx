@@ -17,18 +17,18 @@ const EditPost = () => {
   const [hashTags, setHashTags] = useState<string[]>([]);
 
   useEffect(() => {
-    const onFetch = async () => {
-      await onGetPost();
+    const fetchData = async () => {
+      await getPost();
     };
 
-    onFetch();
+    fetchData();
   }, []);
 
   useEffect(() => {
     console.log(postInfo);
   }, [postInfo]);
 
-  const onGetPost = async () => {
+  const getPost = async () => {
     try {
       const result = await fetch(
         `${process.env.REACT_APP_API}/articles/id/${postId}`
