@@ -40,7 +40,7 @@ const Home = () => {
   const onGetPosts = async () => {
     try {
       const result = await fetch(
-        `http://localhost:8080/articles/keyword/a?page=${currentPage - 1}&size=${SIZE}&sort=${sortType},desc`
+        `${process.env.REACT_APP_API}/articles/keyword/a?page=${currentPage - 1}&size=${SIZE}&sort=${sortType},desc`
       );
       const json = await result.json();
 

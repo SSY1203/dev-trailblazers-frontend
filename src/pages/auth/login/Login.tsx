@@ -16,13 +16,11 @@ const Login = () => {
 
       const formData = new FormData(event.currentTarget);
 
-      fetch(`http://localhost:8080/login`, {
+      fetch(`${process.env.REACT_APP_API}/login`, {
         method: 'POST',
         credentials: 'include',
         body: formData,
-      }).then((res) => {
-        console.log(res);
-
+      }).then(async (res) => {
         if (res.status === 200) {
           alert('로그인 성공했습니다.');
           navigate('/');

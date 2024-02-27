@@ -21,7 +21,7 @@ const CreatePost = () => {
 
   const onCreatePost = async () => {
     try {
-      const result = await fetch(`/articles`, {
+      const result = await fetch(`${process.env.REACT_APP_API}/articles`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -27,7 +27,9 @@ const Post = () => {
 
   const onGetPost = async () => {
     try {
-      const result = await fetch(`/articles/id/${postId}`);
+      const result = await fetch(
+        `${process.env.REACT_APP_API}/articles/id/${postId}`
+      );
       const data = await result.json();
       const parentComments: CommentType[] = data.commentDtos
         .filter((comment: CommentType) => !comment.parentCommentId)
@@ -74,7 +76,7 @@ const Post = () => {
         return;
       }
 
-      await fetch(`/articles/id/${postId}`, {
+      await fetch(`${process.env.REACT_APP_API}/articles/id/${postId}`, {
         method: 'DELETE',
       });
 

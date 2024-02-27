@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import { SIZE, SORT_FIELD } from '../../data';
 import { useNavigate } from 'react-router-dom';
-
-interface HeaderType {
-  setPosts?: any;
-}
 
 const Header = () => {
   const navigate = useNavigate();
@@ -27,14 +22,28 @@ const Header = () => {
     }
   };
 
+  const onLogout = () => {
+    try {
+      fetch(`${process.env.REACT_APP_API}/logout`);
+
+      alert('로그아웃 되었습니다.');
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <header className="borderBottom">
       <div className="bg-gray-100 h-12">
         <div className=" iconPosition gap-0 items-center  contentsWidth">
-          <div className="grid grid-cols-3 gap-0">
+          <div className={`grid grid-cols-4 gap-0`}>
             <a href="/login" className="subHeader">
               로그인
             </a>
+            <button onClick={onLogout} className="subHeader inlineBorder px-2">
+              로그아웃
+            </button>
             <a
               href="/mypage/edit/user/id"
               className="subHeader inlineBorder px-2"

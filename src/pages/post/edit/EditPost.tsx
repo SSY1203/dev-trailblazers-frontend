@@ -30,7 +30,9 @@ const EditPost = () => {
 
   const onGetPost = async () => {
     try {
-      const result = await fetch(`/articles/id/${postId}`);
+      const result = await fetch(
+        `${process.env.REACT_APP_API}/articles/id/${postId}`
+      );
       const {
         id,
         title,
@@ -57,13 +59,16 @@ const EditPost = () => {
 
   const onEditPost = async () => {
     try {
-      const result = await fetch(`/articles/id/${postId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postInfo),
-      });
+      const result = await fetch(
+        `${process.env.REACT_APP_API}/articles/id/${postId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(postInfo),
+        }
+      );
       // const data = await result.json();
       // console.log(result.json());
       // navigate(`/post/${data.id}`);
