@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CommentCard, Editor, Layout } from '../../components';
 import { useEffect, useState } from 'react';
 import { CommentType, PostType } from '../../types/PostType';
+import { deleteMethod, getMethod } from '../../apis';
 
 const Post = () => {
   const navigate = useNavigate();
@@ -27,10 +28,8 @@ const Post = () => {
 
   const getPost = async () => {
     try {
-      const result = await fetch(
-        `${process.env.REACT_APP_API}/articles/id/${postId}`
-      );
-      const data = await result.json();
+      const result = await getMethod(`/articles/id/${postId}`);
+      const data = await result?.json();
       const parentComments: CommentType[] = data.commentDtos
         .filter((comment: CommentType) => !comment.parentCommentId)
         .sort(
@@ -75,10 +74,7 @@ const Post = () => {
       ) {
         return;
       }
-
-      await fetch(`${process.env.REACT_APP_API}/articles/id/${postId}`, {
-        method: 'DELETE',
-      });
+      await deleteMethod(`/articles/id/${postId}`);
 
       alert('삭제되었습니다.');
       navigate('/post');

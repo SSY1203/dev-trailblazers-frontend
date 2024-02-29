@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Editor, Layout } from '../../../components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PostType } from '../../../types/PostType';
+import { putMethod } from '../../../apis';
 
 const initialPost = {
   title: '',
@@ -59,15 +60,9 @@ const EditPost = () => {
 
   const onEditPost = async () => {
     try {
-      const result = await fetch(
-        `${process.env.REACT_APP_API}/articles/id/${postId}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(postInfo),
-        }
+      const result = await putMethod(
+        `/articles/id/${postId}`,
+        JSON.stringify(postInfo)
       );
       // const data = await result.json();
       // console.log(result.json());

@@ -1,7 +1,9 @@
 import { Layout } from '../../../components';
 import GithubLogin from '../../../assets/github-login.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { postMethod } from '../../../apis';
+import { getCookie } from '../../../utils';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,27 +12,36 @@ const Login = () => {
     password: '1234',
   });
 
-  const onLogin = (event: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    const nickname = getCookie('USERINFO');
+
+    if (nickname) {
+      alert('이미 로그인 상태입니다.');
+      navigate(-1);
+    }
+  }, []);
+
+  const onLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
 
       const formData = new FormData(event.currentTarget);
 
-      fetch(`${process.env.REACT_APP_API}/login`, {
-        method: 'POST',
-        credentials: 'include',
-        body: formData,
-      }).then(async (res) => {
-        if (res.status === 200) {
+      await postMethod('/login', formData).then(async (res) => {
+        if (res?.status === 200) {
           alert('로그인 성공했습니다.');
           navigate('/');
           return;
         }
 
-        if (res.status === 403) {
-          throw new Error('아이디 혹은 비밀번호가 일치하지 않습니다.');
+        if (res?.status === 403) {
+          throw new Error(
+            '로그인에 실패했습니다. 아이디 혹은 비밀번호가 일치하는 지 확인해 주세요.'
+          );
         } else {
-          alert('로그인에 실패했습니다.');
+          alert(
+            '로그인에 실패했습니다. 아이디 혹은 비밀번호가 일치하는 지 확인해 주세요.'
+          );
           return;
         }
       });

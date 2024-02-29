@@ -3,6 +3,8 @@ import { Layout, Pagination, PostCard } from '../../components';
 import { useEffect, useState } from 'react';
 import { PostType } from '../../types/PostType';
 import { SIZE } from '../../data';
+import { getMethod } from '../../apis';
+import { getCookie } from '../../utils';
 
 const InquiryPosts = () => {
   const { keyword } = useParams();
@@ -40,16 +42,27 @@ const InquiryPosts = () => {
 
   const getPosts = async () => {
     try {
-      const result = await fetch(
-        `${process.env.REACT_APP_API}/articles/keyword/${keyword}?page=${currentPage - 1}&size=${SIZE}&sort=${sortType},desc`
+      const result = await getMethod(
+        `/articles/keyword/${keyword}?page=${currentPage - 1}&size=${SIZE}&sort=${sortType},desc`
       );
-      const json = await result.json();
+      const json = await result?.json();
 
       setPosts(json.dtos);
       setTotalPostsCount(json.totalCount);
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const onWritePost = () => {
+    const nickname = getCookie('UESRINFO');
+
+    if (!nickname) {
+      navigate('/login');
+      return;
+    }
+
+    navigate('/post/create');
   };
 
   return (
@@ -68,7 +81,7 @@ const InquiryPosts = () => {
         </select>
         <button
           className="basicButton bg-zinc-600 text-white"
-          onClick={() => navigate('/post/create')}
+          onClick={onWritePost}
         >
           글쓰기
         </button>
