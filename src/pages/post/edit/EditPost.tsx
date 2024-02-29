@@ -34,24 +34,13 @@ const EditPost = () => {
       const result = await fetch(
         `${process.env.REACT_APP_API}/articles/id/${postId}`
       );
-      const {
-        id,
-        title,
-        content,
-        hashtags,
-        createdAt,
-        modifiedAt,
-        modifiedBy,
-      } = await result.json();
+      const { id, title, content, hashtags } = await result.json();
 
       setPostInfo({
         id,
         title,
         content,
         hashtags,
-        createdAt,
-        modifiedAt,
-        modifiedBy,
       });
     } catch (error) {
       console.log(error);
@@ -60,14 +49,9 @@ const EditPost = () => {
 
   const onEditPost = async () => {
     try {
-      const result = await putMethod(
-        `/articles/id/${postId}`,
-        JSON.stringify(postInfo)
-      );
-      // const data = await result.json();
-      // console.log(result.json());
-      // navigate(`/post/${data.id}`);
-
+      const result = await putMethod(`/articles`, JSON.stringify(postInfo));
+      console.log(postInfo);
+      console.log(result);
       alert('수정되었습니다.');
       navigate(-1);
     } catch (error) {
@@ -120,7 +104,7 @@ const EditPost = () => {
             >
               수정
             </button>
-            <button className="basicButton" onClick={() => navigate('/post')}>
+            <button className="basicButton" onClick={() => navigate(-1)}>
               취소
             </button>
           </div>

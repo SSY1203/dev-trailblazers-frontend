@@ -12,15 +12,6 @@ const Login = () => {
     password: '1234',
   });
 
-  useEffect(() => {
-    const nickname = getCookie('USERINFO');
-
-    if (nickname) {
-      alert('이미 로그인 상태입니다.');
-      navigate(-1);
-    }
-  }, []);
-
   const onLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();

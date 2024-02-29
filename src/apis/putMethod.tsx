@@ -3,6 +3,9 @@ const putMethod = async (url: string, body: string) => {
     const result = await fetch(`${process.env.REACT_APP_API}${url}`, {
       method: 'PUT',
       credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body,
     });
 

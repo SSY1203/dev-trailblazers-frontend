@@ -3,6 +3,7 @@ import { CommentCard, Editor, Layout } from '../../components';
 import { useEffect, useState } from 'react';
 import { CommentType, PostType } from '../../types/PostType';
 import { deleteMethod, getMethod } from '../../apis';
+import DOMPurify from 'isomorphic-dompurify';
 
 const Post = () => {
   const navigate = useNavigate();
@@ -20,7 +21,6 @@ const Post = () => {
   useEffect(() => {
     const fetchData = async () => {
       await getPost();
-      console.log(postInfo);
     };
 
     fetchData();
@@ -30,6 +30,8 @@ const Post = () => {
     try {
       const result = await getMethod(`/articles/id/${postId}`);
       const data = await result?.json();
+      console.log(data);
+
       const parentComments: CommentType[] = data.commentDtos
         .filter((comment: CommentType) => !comment.parentCommentId)
         .sort(
@@ -69,7 +71,7 @@ const Post = () => {
     try {
       if (
         !confirm(
-          '해당 게시글을 삭제하시겠습니까? \n 한 번 삭제한 게시글은 복구하실 수 없습니다.'
+          '해당 게시글을 삭제하시겠습니까? \n한 번 삭제한 게시글은 복구하실 수 없습니다.'
         )
       ) {
         return;
@@ -101,8 +103,10 @@ const Post = () => {
         </div>
         <div className="p-7 borderBottom">
           <div
-            className="mb-[60px] min-h-[500px]"
-            dangerouslySetInnerHTML={{ __html: postInfo.content }}
+            className="mb-[60px] min-h-[500px] view ql-editor"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(postInfo.content),
+            }}
           ></div>
           <div className="flex justify-between">
             <div>
@@ -149,7 +153,13 @@ const Post = () => {
             <button className="basicButton bg-zinc-600 text-white">등록</button>
           </div>
           <div className="mt-[30px]">
-            <Editor height={'300px'} />
+            <Editor
+              height={'300px'}
+              value=""
+              onChange={(value) => {
+                return;
+              }}
+            />
           </div>
         </div>
         <div className="borderBottom py-[10px]"></div>

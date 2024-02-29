@@ -53,8 +53,8 @@ const Home = () => {
     }
   };
 
-  const onWritePost = () => {
-    const nickname = getCookie('UESRINFO');
+  const onWritePost = async () => {
+    const nickname = await getCookie('USERINFO');
 
     if (!nickname) {
       navigate('/login');
