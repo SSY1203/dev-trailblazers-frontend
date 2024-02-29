@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Editor, Layout } from '../../../components';
 import { useNavigate } from 'react-router-dom';
 import { PostType } from '../../../types/PostType';
+import { postMethod } from '../../../apis';
 
 const initialPost = {
   title: '',
@@ -21,14 +22,8 @@ const CreatePost = () => {
 
   const onCreatePost = async () => {
     try {
-      const result = await fetch(`${process.env.REACT_APP_API}/articles`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postInfo),
-      });
-      const data = await result.json();
+      const result = await postMethod('/articles', JSON.stringify(postInfo));
+      const data = await result?.json();
 
       alert('게시되었습니다.');
       navigate(`/post/${data}`);
