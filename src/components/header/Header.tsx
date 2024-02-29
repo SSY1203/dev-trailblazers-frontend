@@ -46,16 +46,9 @@ const Header = () => {
   };
 
   // 로그아웃
-  // TODO 로딩 구현
-  // TODO credentials: 'include' 블로그 쓰기
   const onLogout = async () => {
     try {
       await postMethod('/logout').then((res) => {
-        // 서버에서 쿠키를 어떠한 오류로 인해 지우지 못했을 경우,
-        // 지워지지 않은 JSESSIONID를 통해 서버에게 요청을 보내면
-        // 서버가 만료된 ID라는 응답을 줌
-        // 만료된 ID라는 응답을 받을 경우, 클라이언트에서 직접 쿠키를 모두 삭제
-        // 실제 실패 사유가 있어야 로직 처리 가능 -> 나중에 소통해보기
         alert('로그아웃 되었습니다.');
         navigate('/login');
       });

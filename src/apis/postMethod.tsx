@@ -3,6 +3,9 @@ const postMethod = async (url: string, body?: string | FormData) => {
     const result = await fetch(`${process.env.REACT_APP_API}${url}`, {
       method: 'POST',
       credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body,
     });
 

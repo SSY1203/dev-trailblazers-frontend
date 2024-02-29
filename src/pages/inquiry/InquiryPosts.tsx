@@ -55,7 +55,7 @@ const InquiryPosts = () => {
   };
 
   const onWritePost = () => {
-    const nickname = getCookie('UESRINFO');
+    const nickname = getCookie('USERINFO');
 
     if (!nickname) {
       navigate('/login');

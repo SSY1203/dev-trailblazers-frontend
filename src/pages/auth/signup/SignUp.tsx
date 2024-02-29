@@ -4,6 +4,7 @@ import { Layout } from '../../../components';
 const SignUp = () => {
   const [phone, setPhone] = useState('');
 
+  //   회원가입 요청 uri : /auth/join
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();

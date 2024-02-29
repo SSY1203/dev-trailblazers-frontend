@@ -16,16 +16,13 @@ const CreatePost = () => {
   const [postInfo, setPostInfo] = useState<PostType>(initialPost);
   const [hashTags, setHashTags] = useState<string[]>([]);
 
-  useEffect(() => {
-    console.log(postInfo);
-  }, [postInfo]);
-
   const onCreatePost = async () => {
     try {
       const result = await postMethod('/articles', JSON.stringify(postInfo));
       const data = await result?.json();
 
       alert('게시되었습니다.');
+
       navigate(`/post/${data}`);
     } catch (error) {
       console.log(error);
