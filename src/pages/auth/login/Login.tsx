@@ -1,9 +1,8 @@
 import { Layout } from '../../../components';
 import GithubLogin from '../../../assets/github-login.svg';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postMethod } from '../../../apis';
-import { getCookie } from '../../../utils';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ const Login = () => {
 
       const formData = new FormData(event.currentTarget);
 
-      await postMethod('/login', formData).then(async (res) => {
+      postMethod('/login', formData).then(async (res) => {
         if (res?.status === 200) {
           alert('로그인 성공했습니다.');
           navigate('/');
@@ -54,10 +53,9 @@ const Login = () => {
               아이디(이메일)
             </label>
             <input
-              // required
+              required
               name="username"
               id="loginId"
-              // type="email"
               className="basicBorder px-[15px] py-[15px]"
               value={loginInfo.username}
               onChange={(event) =>
@@ -76,7 +74,7 @@ const Login = () => {
               비밀번호
             </label>
             <input
-              // required
+              required
               id="loginPassword"
               name="password"
               type="password"
