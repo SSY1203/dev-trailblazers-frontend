@@ -58,14 +58,14 @@ const Editor = ({ height, value, onChange }: EditorPropType) => {
     toolbar: {
       container: [
         [{ header: [1, 2, 3, 4, false] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        ['bold', 'underline', 'strike', 'blockquote'],
         [
           { list: 'ordered' },
           { list: 'bullet' },
           { indent: '-1' },
           { indent: '+1' },
         ],
-        [{ list: 'ordered' }, { list: 'bullet' }, 'link', 'image'],
+        ['link', 'image'],
         [
           { align: [] },
           {
@@ -161,7 +161,6 @@ const Editor = ({ height, value, onChange }: EditorPropType) => {
   const formats = [
     'header',
     'bold',
-    'italic',
     'underline',
     'strike',
     'blockquote',
