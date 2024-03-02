@@ -49,9 +49,10 @@ const EditPost = () => {
 
   const onEditPost = async () => {
     try {
-      const result = await putMethod(`/articles`, JSON.stringify(postInfo));
-      console.log(postInfo);
-      console.log(result);
+      const result = await putMethod(
+        `/articles/id/${postId}`,
+        JSON.stringify(postInfo)
+      );
       alert('수정되었습니다.');
       navigate(-1);
     } catch (error) {
