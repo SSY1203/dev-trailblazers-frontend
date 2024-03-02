@@ -79,7 +79,7 @@ const Post = () => {
       await deleteMethod(`/articles/id/${postId}`);
 
       alert('삭제되었습니다.');
-      navigate('/post');
+      navigate('/');
     } catch (error) {
       console.log(error);
     }

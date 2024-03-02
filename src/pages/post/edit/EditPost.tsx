@@ -54,7 +54,7 @@ const EditPost = () => {
         JSON.stringify(postInfo)
       );
       alert('수정되었습니다.');
-      navigate(-1);
+      navigate(`/post/${postId}`);
     } catch (error) {
       console.log(error);
     }
