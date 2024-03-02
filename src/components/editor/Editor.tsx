@@ -11,6 +11,7 @@ interface EditorPropType {
 }
 
 const Editor = ({ height, value, onChange }: EditorPropType) => {
+  console.log(value);
   const quillRef = useRef<ReactQuill | null>(null);
   const toolbar = quillRef.current?.getEditor().getModule('toolbar');
 
@@ -26,10 +27,6 @@ const Editor = ({ height, value, onChange }: EditorPropType) => {
       const file = input.files && input.files[0];
       const range = editor?.getSelection(true);
       try {
-        console.log(editor);
-        console.log(file);
-        console.log(range);
-
         if (editor && range) {
           // 파일명을 "image/Date.now()"로 저장
           const storageRef = ref(storage, `image/${Date.now()}`);
@@ -57,7 +54,7 @@ const Editor = ({ height, value, onChange }: EditorPropType) => {
   const modules = {
     toolbar: {
       container: [
-        [{ header: [1, 2, 3, 4, false] }],
+        [{ header: [1, 2, 3, false] }],
         ['bold', 'underline', 'strike', 'blockquote'],
         [
           { list: 'ordered' },
@@ -172,6 +169,7 @@ const Editor = ({ height, value, onChange }: EditorPropType) => {
     'align',
     'color',
     'background',
+    'width',
   ];
 
   return (
