@@ -47,6 +47,14 @@ h1 {
   font-size: 2em;
 }
 
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.17em;
+}
+
 /* 컴포넌트 스타일 */
 @layer components {
   /* Sub header */
