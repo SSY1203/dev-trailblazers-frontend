@@ -74,7 +74,7 @@ h3 {
 
   /* 페이지네이션 화살표 */
   .paginationIcon {
-    @apply ms-0 border-e-0;
+    @apply ms-0 px-1 pr-0.5;
   }
 
   /* 좋아요 및 댓글 개수 표시 */
