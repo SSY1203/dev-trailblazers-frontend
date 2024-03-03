@@ -29,7 +29,7 @@ const PostCard = ({ post, style = 'borderBottom' }: PostCardPropType) => {
     >
       <div className="w-full flex flex-col items-start gap-3">
         <div className="flex justify-between w-full">
-          <span className="text-sm text-zinc-600">{post.modifiedBy}님</span>
+          <span className="text-sm text-zinc-600">{post.userId}님</span>
           <span className="text-zinc-400 font-medium text-sm">
             {new Date(post.createdAt ?? '').toLocaleString()}
           </span>
