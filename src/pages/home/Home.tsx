@@ -46,6 +46,8 @@ const Home = () => {
       );
       const json = await result?.json();
 
+      console.log(json);
+
       setPosts(json.dtos);
       setTotalPostsCount(json.totalCount);
     } catch (error) {
