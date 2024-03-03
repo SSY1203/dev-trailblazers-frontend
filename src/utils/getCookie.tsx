@@ -1,19 +1,11 @@
 // 쿠키 가져오기
+import cookie from 'cookie';
+
 const getCookie = (key: string) => {
-  let value: string | null = null;
-  const cookies = document.cookie.split(';');
-  cookies.find((cookie) => {
-    cookie = cookie.replace(' ', '');
+  const cookies = cookie.parse(document.cookie ?? '');
+  const cookieObj = JSON.parse(cookies.USERINFO);
 
-    const tuple = cookie.split('=');
-
-    if (key === tuple[0]) {
-      value = tuple[1];
-      return true;
-    }
-  });
-
-  return value;
+  return cookieObj[key];
 };
 
 export default getCookie;

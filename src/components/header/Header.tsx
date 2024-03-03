@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../../utils';
 import { postMethod } from '../../apis';
+import cookie from 'cookie';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -11,18 +12,18 @@ const Header = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await getUser();
+      await getUserNickname();
     };
 
     fetchData();
   }, []);
 
-  const getUser = async () => {
+  const getUserNickname = async () => {
     try {
-      const cookie = getCookie('USERINFO');
+      const user = getCookie('nickname');
 
-      if (cookie) {
-        setNickname(cookie);
+      if (user) {
+        setNickname(user);
       }
     } catch (error) {
       console.log(error);

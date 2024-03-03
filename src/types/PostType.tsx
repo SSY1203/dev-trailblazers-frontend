@@ -7,6 +7,7 @@ export interface CommentType {
   modifiedAt: string;
   modifiedBy: number;
   parentCommentId: number | null;
+  isRemoved?: boolean;
 }
 
 export interface PostType {

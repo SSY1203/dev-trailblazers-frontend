@@ -2,8 +2,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CommentCard, Editor, Layout } from '../../components';
 import { useEffect, useState } from 'react';
 import { CommentType, PostType } from '../../types/PostType';
-import { deleteMethod, getMethod } from '../../apis';
+import { deleteMethod, getMethod, postMethod } from '../../apis';
 import DOMPurify from 'isomorphic-dompurify';
+import { getCookie } from '../../utils';
 
 const Post = () => {
   const navigate = useNavigate();
@@ -18,9 +19,16 @@ const Post = () => {
     { parentComment: CommentType; childComments: CommentType[] | null }[]
   >([]);
 
+  const [commentInfo, setCommentInfo] = useState({
+    parentCommentId: null,
+    content: '',
+  });
+  const [userId, setUserInfo] = useState(0);
+
   useEffect(() => {
     const fetchData = async () => {
       await getPost();
+      await getUser();
     };
 
     fetchData();
@@ -65,6 +73,11 @@ const Post = () => {
     }
   };
 
+  const getUser = async () => {
+    const id = getCookie('userId');
+    setUserInfo(+id);
+  };
+
   // Dto : Data Transfer Object
   // 삭제
   const onDeletePost = async () => {
@@ -84,6 +97,23 @@ const Post = () => {
       console.log(error);
     }
   };
+
+  // 댓글 추가
+  const onCreateComment = async () => {
+    try {
+      await postMethod(
+        `/comments`,
+        JSON.stringify({ ...commentInfo, articleId: postId })
+      );
+
+      setCommentInfo((prev) => ({ ...prev, content: '' }));
+      await getPost();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // user 정보를 utp-8로 decoding 형태로 불러오기
 
   return (
     <Layout>
@@ -131,17 +161,19 @@ const Post = () => {
                 </a>
               </div>
             </div>
-            <div className="flex gap-4">
-              <button
-                className="basicButton bg-zinc-600 text-white"
-                onClick={() => navigate(`/post/edit/${postId}`)}
-              >
-                수정
-              </button>
-              <button onClick={onDeletePost} className="basicButton">
-                삭제
-              </button>
-            </div>
+            {userId === postInfo.userId && (
+              <div className="flex gap-4">
+                <button
+                  className="basicButton bg-zinc-600 text-white"
+                  onClick={() => navigate(`/post/edit/${postId}`)}
+                >
+                  수정
+                </button>
+                <button onClick={onDeletePost} className="basicButton">
+                  삭제
+                </button>
+              </div>
+            )}
           </div>
         </div>
         {/* 댓글 시작 */}
@@ -150,14 +182,19 @@ const Post = () => {
             댓글 달기
           </span>
           <div className="absolute right-[20px] top-[12px] iconPosition ">
-            <button className="basicButton bg-zinc-600 text-white">등록</button>
+            <button
+              className="basicButton bg-zinc-600 text-white"
+              onClick={onCreateComment}
+            >
+              등록
+            </button>
           </div>
           <div className="mt-[30px]">
             <Editor
               height={'300px'}
-              value=""
+              value={commentInfo.content}
               onChange={(value) => {
-                return;
+                setCommentInfo((prev) => ({ ...prev, content: value }));
               }}
             />
           </div>
@@ -171,15 +208,9 @@ const Post = () => {
                   key={comment.parentComment.id}
                   comment={comment.parentComment}
                   childCount={comment.childComments?.length}
+                  currentUserId={userId}
+                  childComments={comment.childComments}
                 />
-                {comment.childComments
-                  ? comment.childComments.map((childComment) => (
-                      <CommentCard
-                        key={childComment.id}
-                        comment={childComment}
-                      />
-                    ))
-                  : null}
               </>
             ))
           ) : (
