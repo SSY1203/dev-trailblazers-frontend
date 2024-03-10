@@ -50,7 +50,7 @@ const Login = () => {
         >
           <div className="labelInput">
             <label htmlFor="loginId" className="text-[18px] font-semibold">
-              아이디(이메일)
+              아이디
             </label>
             <input
               required

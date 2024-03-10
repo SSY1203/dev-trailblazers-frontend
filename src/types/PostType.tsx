@@ -20,4 +20,5 @@ export interface PostType {
   modifiedBy?: number;
   commentDtos?: CommentType[];
   userId?: number;
+  commentCount?: number;
 }

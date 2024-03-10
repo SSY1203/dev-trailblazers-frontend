@@ -7,21 +7,6 @@ interface PostCardPropType {
 }
 
 const PostCard = ({ post, style = 'borderBottom' }: PostCardPropType) => {
-  const [commentsCount, setCommentsCount] = useState(0);
-
-  useEffect(() => {
-    onCountComments();
-  }, []);
-
-  const onCountComments = async () => {
-    try {
-      const result = await fetch(`/articles/id/${post.id}`);
-      const json = await result.json();
-      setCommentsCount(json.commentDtos.length);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <a
       href={`/post/${post.id}`}
@@ -52,7 +37,7 @@ const PostCard = ({ post, style = 'borderBottom' }: PostCardPropType) => {
           </div>
           <div className="likeAndChat">
             <span className="material-symbols-outlined">sms</span>
-            <span>{commentsCount}</span>
+            <span>{post.commentCount}</span>
           </div>
         </div>
       </div>

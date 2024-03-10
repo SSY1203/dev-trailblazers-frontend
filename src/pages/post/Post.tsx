@@ -88,10 +88,12 @@ const Post = () => {
       ) {
         return;
       }
-      await deleteMethod(`/articles/id/${postId}`);
+      const result = await deleteMethod(`/articles/id/${postId}`);
+      // const json = await result?.json();
+      // console.log(json);
 
       alert('삭제되었습니다.');
-      navigate('/');
+      // navigate('/');
     } catch (error) {
       console.log(error);
     }
