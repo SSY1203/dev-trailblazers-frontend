@@ -38,7 +38,6 @@ const Post = () => {
     try {
       const result = await getMethod(`/articles/id/${postId}`);
       const data = await result?.json();
-      console.log(data);
 
       const parentComments: CommentType[] = data.commentDtos
         .filter((comment: CommentType) => !comment.parentCommentId)
@@ -108,12 +107,11 @@ const Post = () => {
 
       setCommentInfo((prev) => ({ ...prev, content: '' }));
       await getPost();
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      alert('로그인 후 이용하실 수 있습니다.');
     }
   };
-
-  // user 정보를 utp-8로 decoding 형태로 불러오기
 
   return (
     <Layout>

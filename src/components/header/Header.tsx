@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCookie } from '../../utils';
+import { getCookie, logOut } from '../../utils';
 import { postMethod } from '../../apis';
 import cookie from 'cookie';
 
@@ -47,15 +47,10 @@ const Header = () => {
   };
 
   // 로그아웃
-  const onLogout = async () => {
-    try {
-      await postMethod('/logout').then((res) => {
-        alert('로그아웃 되었습니다.');
-        navigate('/login');
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  const onLogOut = async () => {
+    await logOut();
+    alert('로그아웃 되었습니다.');
+    navigate('/login');
   };
 
   return (
@@ -72,7 +67,7 @@ const Header = () => {
             )}
             {nickname && (
               <button
-                onClick={onLogout}
+                onClick={onLogOut}
                 className="subHeader inlineBorder border-r-0 px-2"
               >
                 로그아웃

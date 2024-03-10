@@ -3,7 +3,7 @@ import cookie from 'cookie';
 
 const getCookie = (key: string) => {
   const cookies = cookie.parse(document.cookie ?? '');
-  const cookieObj = JSON.parse(cookies.USERINFO);
+  const cookieObj = JSON.parse(cookies.USERINFO ?? '{}');
 
   return cookieObj[key];
 };
