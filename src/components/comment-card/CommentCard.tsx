@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { CommentType } from '../../types/PostType';
+
 import { getCookie, getTimeDifference } from '../../utils';
-import DOMPurify from 'isomorphic-dompurify';
 import { deleteMethod, postMethod, putMethod } from '../../apis';
 import Editor from '../editor/Editor';
+import { CommentType } from '../../types/PostType';
 
+import DOMPurify from 'isomorphic-dompurify';
 interface CommentPropType {
   comment: CommentType;
   childComments?: CommentType[] | null;
@@ -30,14 +31,18 @@ const CommentCard = ({
     isRemoved,
   } = comment;
 
+  // 등록 날짜
   const [ago, setAgo] = useState<number | string>('');
+  // 수정 날짜
   const [editAgo, setEditAgo] = useState<number | string>('');
   const [isLogin, setIsLogin] = useState(false);
+  // 수정 중인지 여부
   const [isEdit, setIsEdit] = useState(false);
   const [commentInfo, setCommentInfo] = useState({
     parentCommentId,
     content,
   });
+  // 대댓글 editor open 여부
   const [isComment, setIsComment] = useState(false);
   const [childCommentInfo, setChildCommentInfo] = useState<{
     parentCommentId: number | null;
@@ -76,7 +81,7 @@ const CommentCard = ({
       alert('삭제되었습니다.');
       window.location.reload();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

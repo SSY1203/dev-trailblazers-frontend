@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { PostType } from '../../types/PostType';
 
 interface PostCardPropType {

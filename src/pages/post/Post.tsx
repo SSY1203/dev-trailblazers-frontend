@@ -1,10 +1,12 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { CommentCard, Editor, Layout } from '../../components';
 import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { CommentCard, Editor, Layout } from '../../components';
 import { CommentType, PostType } from '../../types/PostType';
 import { deleteMethod, getMethod, postMethod } from '../../apis';
-import DOMPurify from 'isomorphic-dompurify';
 import { getCookie } from '../../utils';
+
+import DOMPurify from 'isomorphic-dompurify';
 
 const Post = () => {
   const navigate = useNavigate();
@@ -88,12 +90,10 @@ const Post = () => {
       ) {
         return;
       }
-      const result = await deleteMethod(`/articles/id/${postId}`);
-      // const json = await result?.json();
-      // console.log(json);
+      await deleteMethod(`/articles/id/${postId}`);
 
       alert('삭제되었습니다.');
-      // navigate('/');
+      navigate('/');
     } catch (error) {
       console.log(error);
     }

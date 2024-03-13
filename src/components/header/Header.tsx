@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { getCookie, logOut } from '../../utils';
-import { postMethod } from '../../apis';
-import cookie from 'cookie';
 
 const Header = () => {
   const navigate = useNavigate();

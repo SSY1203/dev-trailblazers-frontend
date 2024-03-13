@@ -11,7 +11,7 @@ const putMethod = async (url: string, body: string) => {
 
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 

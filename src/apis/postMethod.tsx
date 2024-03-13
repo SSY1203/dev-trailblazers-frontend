@@ -18,7 +18,7 @@ const postMethod = async (url: string, body?: string | FormData) => {
 
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 

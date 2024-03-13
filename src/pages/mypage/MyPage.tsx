@@ -1,7 +1,11 @@
 import { useLocation, useParams } from 'react-router-dom';
 import { Layout } from '../../components';
 
-const MyPage = ({ children }: any) => {
+interface MyPageprops {
+  children: React.ReactNode;
+}
+
+const MyPage = ({ children }: MyPageprops) => {
   const { pathname } = useLocation();
   const { category } = useParams();
 

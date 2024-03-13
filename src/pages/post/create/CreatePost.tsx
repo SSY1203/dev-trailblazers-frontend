@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Editor, Layout } from '../../../components';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { Editor, Layout } from '../../../components';
 import { PostType } from '../../../types/PostType';
 import { postMethod } from '../../../apis';
 

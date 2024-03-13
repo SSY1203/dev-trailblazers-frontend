@@ -1,6 +1,7 @@
-import { useNavigate } from 'react-router-dom';
-import { Layout, Pagination, PostCard } from '../../components';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { Layout, Pagination, PostCard } from '../../components';
 import { SIZE } from '../../data';
 import { PostType } from '../../types/PostType';
 import { getMethod } from '../../apis';

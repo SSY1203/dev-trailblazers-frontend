@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { PAGES_PER_SECTION, SIZE } from '../../data';
 
 interface PaginationType {

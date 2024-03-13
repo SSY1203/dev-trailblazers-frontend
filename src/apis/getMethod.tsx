@@ -10,7 +10,7 @@ const getMethod = async (url: string) => {
 
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 

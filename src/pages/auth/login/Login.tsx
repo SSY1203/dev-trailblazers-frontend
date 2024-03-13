@@ -1,8 +1,10 @@
-import { Layout } from '../../../components';
-import GithubLogin from '../../../assets/github-login.svg';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { Layout } from '../../../components';
 import { postMethod } from '../../../apis';
+
+import GithubLogin from '../../../assets/github-login.svg';
 
 const Login = () => {
   const navigate = useNavigate();
